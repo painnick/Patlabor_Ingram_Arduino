@@ -13,12 +13,9 @@
 #define LED_SHOULDER2 10 // RED? PNK? 1K ohm
 #define LED_SHOULDER3 11 // YELLOW. 330 ohm
 
-#define BUZZER_INTERVAL 50
-
 #define SHOULDER_INTERVAL 100  // soulder 1 & 2
 #define SHOULDER3_INTERVAL 300 // soulder 3
 
-bool buzzer_on = true;
 bool soulder_on = true;
 bool soulder3_on = true;
 
@@ -43,19 +40,11 @@ void setup()
   digitalWrite(LED_SHOULDER3, soulder3_on ? HIGH : LOW);
 }
 
-unsigned long buzzer_lastMills = 0;
 unsigned long soulder_lastMills = 0;
 unsigned long soulder3_lastMills = 0;
 void loop()
 {
   unsigned long currentMills = millis();
-  if (buzzer_lastMills == 0 || buzzer_lastMills + BUZZER_INTERVAL < currentMills)
-  {
-    soulder_on = !soulder_on;
-    digitalWrite(BUZZER, soulder_on ? HIGH : LOW);
-
-    buzzer_lastMills = currentMills;
-  }
   if (soulder_lastMills == 0 || soulder_lastMills + SHOULDER_INTERVAL < currentMills)
   {
     soulder_on = !soulder_on;
@@ -74,5 +63,5 @@ void loop()
   }
 
   siren.call(currentMills);
-  delay(1);
+  // delay(1);
 }
