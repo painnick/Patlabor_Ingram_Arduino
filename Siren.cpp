@@ -23,7 +23,6 @@ void Siren::call(unsigned long mills)
     }
     else if ((loopIndex == 1) && (lastFreq < FREQ_MIN))
     {
-        Serial.println("===============================================");
         loopIndex = 0;
     }
 
