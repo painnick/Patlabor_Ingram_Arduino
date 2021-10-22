@@ -16,7 +16,7 @@
 #define LED_SHOULDER2_PIN_NO 10 // RED? PNK? 1K ohm
 #define LED_SHOULDER3_PIN_NO 11 // YELLOW. 330 ohm
 
-#define PATROL_CAR_SIREN_INTERVAL 100  // soulder 1 & 2
+#define PATROL_CAR_SIREN_INTERVAL 100  // patrol car siren
 #define SHOULDER_INTERVAL 100  // soulder 1 & 2
 #define SHOULDER3_INTERVAL 300 // soulder 3
 
