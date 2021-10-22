@@ -1,11 +1,16 @@
 #include "Arduino.h"
 #include "Siren.h"
 
+#define INIT_MILLS 10000
 #define FREQ_MIN 634
 #define FREQ_MAX 912
-#define SIREN_SPEED_MODE true
 
-Siren::Siren(int pinNo) : buzzerPinNo(pinNo), lastMills(0), loopIndex(0), lastFreq(FREQ_MIN)
+Siren::Siren(int pinNo, bool speedMode) : buzzerPinNo(pinNo),
+                                                  lastMills(INIT_MILLS),
+                                                  loopIndex(0),
+                                                  lastFreq(FREQ_MIN),
+                                                  toneDelay(1),
+                                                  speedMode(speedMode)
 {
     // Do something
 }
@@ -18,10 +23,23 @@ void Siren::call(unsigned long mills)
     }
     else if ((loopIndex == 1) && (lastFreq < FREQ_MIN))
     {
+        Serial.println("===============================================");
         loopIndex = 0;
     }
 
-    if (lastMills == 0 || (mills - lastMills >= 5))
+    if (speedMode)
+    {
+        toneDelay = 1;
+    }
+    else
+    {
+        if (loopIndex == 0)
+            toneDelay = 3;
+        else
+            toneDelay = 7;
+    }
+
+    if (lastMills == INIT_MILLS || (mills - lastMills >= toneDelay))
     {
         tone(buzzerPinNo, lastFreq);
 

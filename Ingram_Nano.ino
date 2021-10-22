@@ -19,7 +19,7 @@
 bool soulder_on = true;
 bool soulder3_on = true;
 
-Siren siren(BUZZER);
+Siren siren(BUZZER, false);
 
 void setup()
 {
@@ -63,5 +63,4 @@ void loop()
   }
 
   siren.call(currentMills);
-  // delay(1);
 }
