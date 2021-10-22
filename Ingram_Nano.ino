@@ -19,34 +19,34 @@
 #define INIT_MILLS 10000
 
 bool soulder_led_on = true;
-bool soulder3_led_on = true;
+bool soulder3_and_waist_led_on = true;
 
-Siren siren(BUZZER_PIN_NO, false);
+Siren siren(BUZZER_PIN_NO, true);
 
 void setup()
 {
   pinMode(BUZZER_PIN_NO, OUTPUT);
 
   pinMode(LED_HEAD_PIN_NO, OUTPUT);
-  pinMode(LED_WAIST_PIN_NO, OUTPUT);
+  digitalWrite(LED_HEAD_PIN_NO, HIGH);
 
   pinMode(LED_SHOULDER1_PIN_NO, OUTPUT);
   pinMode(LED_SHOULDER2_PIN_NO, OUTPUT);
-  pinMode(LED_SHOULDER3_PIN_NO, OUTPUT);
-
-  digitalWrite(LED_HEAD_PIN_NO, HIGH);
-  digitalWrite(LED_WAIST_PIN_NO, soulder3_led_on ? HIGH : LOW);
-
   digitalWrite(LED_SHOULDER1_PIN_NO, soulder_led_on ? HIGH : LOW);
   digitalWrite(LED_SHOULDER2_PIN_NO, soulder_led_on ? LOW : HIGH);
-  digitalWrite(LED_SHOULDER3_PIN_NO, soulder3_led_on ? HIGH : LOW);
+
+  pinMode(LED_SHOULDER3_PIN_NO, OUTPUT);
+  digitalWrite(LED_SHOULDER3_PIN_NO, soulder3_and_waist_led_on ? HIGH : LOW);
+  pinMode(LED_WAIST_PIN_NO, OUTPUT);
+  digitalWrite(LED_WAIST_PIN_NO, soulder3_and_waist_led_on ? HIGH : LOW);
 }
 
 unsigned long soulder_lastMills = INIT_MILLS;
-unsigned long soulder3_lastMills = INIT_MILLS;
+unsigned long soulder3_and_waist_lastMills = INIT_MILLS;
 void loop()
 {
   unsigned long currentMills = millis();
+
   if (soulder_lastMills == INIT_MILLS || soulder_lastMills + SHOULDER_INTERVAL < currentMills)
   {
     soulder_led_on = !soulder_led_on;
@@ -55,13 +55,14 @@ void loop()
 
     soulder_lastMills = currentMills;
   }
-  if (soulder3_lastMills == INIT_MILLS || soulder3_lastMills + SHOULDER3_INTERVAL < currentMills)
-  {
-    soulder3_led_on = !soulder3_led_on;
-    digitalWrite(LED_WAIST_PIN_NO, soulder3_led_on ? HIGH : LOW);
-    digitalWrite(LED_SHOULDER3_PIN_NO, soulder3_led_on ? HIGH : LOW);
 
-    soulder3_lastMills = currentMills;
+  if (soulder3_and_waist_lastMills == INIT_MILLS || soulder3_and_waist_lastMills + SHOULDER3_INTERVAL < currentMills)
+  {
+    soulder3_and_waist_led_on = !soulder3_and_waist_led_on;
+    digitalWrite(LED_WAIST_PIN_NO, soulder3_and_waist_led_on ? HIGH : LOW);
+    digitalWrite(LED_SHOULDER3_PIN_NO, soulder3_and_waist_led_on ? HIGH : LOW);
+
+    soulder3_and_waist_lastMills = currentMills;
   }
 
   siren.call(currentMills);
