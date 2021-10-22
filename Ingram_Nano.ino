@@ -2,6 +2,7 @@
   제목   : 패트레이버 잉그램
   내용   : 경광등 효과
 */
+#include "Siren.h"
 
 #define BUZZER 5
 
@@ -20,6 +21,8 @@
 bool buzzer_on = true;
 bool soulder_on = true;
 bool soulder3_on = true;
+
+Siren siren(BUZZER);
 
 void setup()
 {
@@ -69,37 +72,7 @@ void loop()
 
     soulder3_lastMills = currentMills;
   }
-  // delay(2);
 
-  police_siren();
-}
-
-#define FREQ_MIN 634
-#define FREQ_MAX 912
-#define SIREN_SPEED_MODE true
-
-int freq, tone_delay = 0;
-void police_siren()
-{
-  for (freq = FREQ_MIN + 1; freq <= FREQ_MAX; freq++)
-  {
-    tone(BUZZER, freq);
-    delay(tone_delay);
-
-    if (SIREN_SPEED_MODE)
-      tone_delay = 1;
-    else
-      tone_delay = 7;
-  }
-
-  for (freq = FREQ_MAX - 1; freq >= FREQ_MIN; freq--)
-  {
-    tone(BUZZER, freq);
-    delay(tone_delay);
-
-    if (SIREN_SPEED_MODE)
-      tone_delay = 1;
-    else
-      tone_delay = 10;
-  }
+  siren.call(currentMills);
+  delay(1);
 }
