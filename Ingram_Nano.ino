@@ -16,9 +16,9 @@
 #define LED_SHOULDER2_PIN_NO 10 // RED? PNK? 1K ohm - GREEN line
 #define LED_SHOULDER3_PIN_NO 11 // YELLOW. 1K ohm - BLACK line
 
-#define PATROL_CAR_SIREN_INTERVAL 100  // patrol car siren
-#define SHOULDER_INTERVAL 100  // soulder 1 & 2
-#define SHOULDER3_INTERVAL 300 // soulder 3
+#define PATROL_CAR_SIREN_INTERVAL 500  // patrol car siren
+#define SHOULDER_INTERVAL 150  // soulder 1 & 2
+#define SHOULDER3_INTERVAL 800 // soulder 3
 
 #define INIT_MILLS 10000
 
@@ -26,7 +26,7 @@ bool patrol_car_siren_led_on = true;
 bool soulder_led_on = true;
 bool soulder3_and_waist_led_on = true;
 
-Siren siren(BUZZER_PIN_NO, true);
+Siren siren(BUZZER_PIN_NO, false);
 
 void setup()
 {
