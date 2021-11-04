@@ -9,12 +9,12 @@
 #define LED_PATROL_CAR_SIREN_PIN_NO 6
 #define LED_PATROL_CAR_LIGHT_PIN_NO 12
 
-#define LED_HEAD_PIN_NO 7  // GREEN & BLUE. 200 ohm
-#define LED_WAIST_PIN_NO 8 // YELLOW. 330 ohm
+#define LED_HEAD_PIN_NO 7  // GREEN & BLUE. 330 ohm - RED line
+#define LED_WAIST_PIN_NO 8 // YELLOW. 330 ohm - YELLOW line
 
-#define LED_SHOULDER1_PIN_NO 9  // RED? PNK? 1K ohm
-#define LED_SHOULDER2_PIN_NO 10 // RED? PNK? 1K ohm
-#define LED_SHOULDER3_PIN_NO 11 // YELLOW. 330 ohm
+#define LED_SHOULDER1_PIN_NO 9  // RED? PNK? 1K ohm - BLUE line
+#define LED_SHOULDER2_PIN_NO 10 // RED? PNK? 1K ohm - GREEN line
+#define LED_SHOULDER3_PIN_NO 11 // YELLOW. 1K ohm - BLACK line
 
 #define PATROL_CAR_SIREN_INTERVAL 100  // patrol car siren
 #define SHOULDER_INTERVAL 100  // soulder 1 & 2
